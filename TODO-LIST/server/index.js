@@ -9,6 +9,7 @@ app.use(cors())
 app.use(express.json())
 
 // Rotas
+
 //inserir
 app.post("/todos", async (req, res) => {
     try {
