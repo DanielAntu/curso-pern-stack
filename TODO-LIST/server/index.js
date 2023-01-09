@@ -67,6 +67,28 @@ app.delete('/todos/:id', async (req,res) => {
     }
 })
 
+// Atualizar dados
+app.put('/todos/:id', async (req, res) => {
+    try {
+        const { id } = req.params
+        const { description } = req.body
+        const updateTodo = await pool.query('UPDATE todo SET description = $1 WHERE todo_id = $2', [description, id])
+        res.json('Todo foi atualizado')
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+app.delete('/todos/:id', async (req, res) => {
+    try {
+        const { id } = req.params
+        const todo = await pool.query('DELETE FROM todo WHERE todo-id = $1', [id])
+        res.json('Todo foi deletado')
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 app.listen(5000, () => {
     console.log('O servidor esta rodando em http://localhost:5000')
 })
